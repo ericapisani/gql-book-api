@@ -1,22 +1,23 @@
 {
-  "name": "gql-recipe-api",
+  "name": "gql-book-api",
   "version": "0.0.1",
   "description": "GraphQL Day Toronto 2019 project.",
   "main": "index.js",
   "scripts": {
+    "dev": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/ericapisani/gql-recipe-api.git"
+    "url": "git+ssh://git@gitlab.com/ericapisani/gql-book-api.git"
   },
   "keywords": [],
   "author": "Erica Pisani",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/ericapisani/gql-recipe-api/issues"
+    "url": "https://gitlab.com/ericapisani/gql-book-api/issues"
   },
-  "homepage": "https://gitlab.com/ericapisani/gql-recipe-api#readme",
+  "homepage": "https://gitlab.com/ericapisani/gql-book-api#readme",
   "dependencies": {
     "apollo-server": "2.3.1",
     "graphql": "14.0.2"
