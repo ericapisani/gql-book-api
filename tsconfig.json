@@ -3,11 +3,18 @@
     "lib": ["es2016", "esnext.asynciterable", "dom"],
     "outDir": "./build",
     "target": "es5",
-    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "noEmitOnError": true,
+    "strict": true,
   },
   "include": [
     "./src/**/*",
     "./index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
   ]
 }
