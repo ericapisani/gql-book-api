@@ -1,5 +1,13 @@
 {
   "compilerOptions": {
-    "lib": ["es2016", "esnext.asynciterable"]
-  }
+    "lib": ["es2016", "esnext.asynciterable", "dom"],
+    "outDir": "./build",
+    "target": "es5",
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+  },
+  "include": [
+    "./src/**/*",
+    "./index.ts"
+  ]
 }
