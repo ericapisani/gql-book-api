@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
     "lib": ["es2016", "esnext.asynciterable", "dom"],
+    "module": "commonjs",
     "outDir": "./build",
-    "target": "es5",
+    "target": "es2016",
     "noImplicitReturns": true,
-    "noImplicitAny": true,
+    // Disabled so I can use the syntax TypeGraphQL is encouraging
+    // to avoid confusion
+    // "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitThis": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noEmitOnError": true,
