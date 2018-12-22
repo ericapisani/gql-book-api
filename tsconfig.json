@@ -4,11 +4,15 @@
     "outDir": "./build",
     "target": "es5",
     "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noEmitOnError": true,
     "strict": true,
   },
+  "compileOnSave": true,
   "include": [
     "./src/**/*",
     "./index.ts"

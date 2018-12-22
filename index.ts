@@ -1,5 +1,6 @@
 const { ApolloServer, gql } = require('apollo-server');
 import { prisma } from './generated/prisma-client';
+import { IBook } from './types';
 
 const typeDefs = gql`
   type Book {
@@ -10,13 +11,17 @@ const typeDefs = gql`
 
   type Query {
     books: [Book]
+    book(id: ID!): Book
   }
 `;
 
 const resolvers = {
   Query: {
-    books: async () => {
-      return await prisma.books();
+    books: (): Promise<Array<IBook>> => {
+      return prisma.books();
+    },
+    book: (_: any, args: any): Promise<IBook> => {
+      return prisma.book({ id: args.id })
     }
   }
 };
