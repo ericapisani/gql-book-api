@@ -15,6 +15,7 @@ let schema
 async function startServer() {
   schema = await buildSchema({
     resolvers,
+    emitSchemaFile: true,
   });
 
   const server = new ApolloServer({ schema })
