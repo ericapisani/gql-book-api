@@ -20,7 +20,7 @@ export class Book {
   @Field(() => ID) // type => Book
   id: string;
 
-  @Field()
+  @Field({ nullable: true })
   author: string;
 
   @Field()
@@ -52,7 +52,6 @@ export class BookService {
   }
 }
 
-@Service()
 @Resolver(() => Book)  // of => Book
 export class BookResolver {
   private readonly bookService: BookService;
@@ -61,19 +60,13 @@ export class BookResolver {
     this.bookService = new BookService();
   }
 
-  // Syntax for making the schema output of this be Book instead of Book!
-  // needs to be figured out
-  @Query(() => Book) // returns => Book
+  @Query(() => Book, { nullable: true }) // returns => Book
   async book(@Arg("id") id: string): Promise<Book | null> {
-    // usage of the injected service
     return this.bookService.get(id);
   }
 
-  // Syntax for making the schema output of this be [Book!] instead of [Book!]!
-  // needs to be figured out
-  @Query(() => [Book]) // returns => [Book]
+  @Query(() => [Book], { nullable: true }) // returns => [Book]
   async books(): Promise<Array<Book>> {
-    // usage of the injected service
     return this.bookService.list();
   }
 }

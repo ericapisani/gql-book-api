@@ -5,11 +5,11 @@
 
 type Book {
   id: ID!
-  author: String!
+  author: String
   title: String!
 }
 
 type Query {
-  book(id: String!): Book!
-  books: [Book!]!
+  book(id: String!): Book
+  books: [Book!]
 }
