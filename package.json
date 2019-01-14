@@ -4,7 +4,7 @@
   "description": "GraphQL Day Toronto 2019 project.",
   "main": "index.ts",
   "scripts": {
-    "dev": "ts-node index.ts",
+    "dev": "nodemon --watch '*.ts' --ignore '*.spec.ts' --exec 'ts-node' index.ts",
     "start-prisma": "docker-compose up -d",
     "deploy-prisma": "prisma deploy",
     "build-ts": "tsc",
@@ -34,6 +34,7 @@
   "devDependencies": {
     "@types/graphql": "14.0.3",
     "eslint-plugin-graphql": "3.0.1",
+    "nodemon": "1.18.9",
     "prettier": "1.15.3",
     "ts-node": "7.0.1",
     "tslint": "5.11.0",
