@@ -3,10 +3,21 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+# A book object/data type
 type Book {
   id: ID!
-  author: String
+  author: String!
   title: String!
+}
+
+# New book data
+input BookCreateInput {
+  title: String!
+  author: String!
+}
+
+type Mutation {
+  addBook(input: BookCreateInput!): Book!
 }
 
 type Query {

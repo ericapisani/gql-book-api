@@ -4,23 +4,31 @@ import {
   ID,
   Resolver,
   Query,
+  Mutation,
   Arg,
+  InputType,
 } from 'type-graphql';
 import { Service } from "typedi";
-import { prisma } from './generated/prisma-client';
+import {
+  prisma,
+} from './generated/prisma-client';
 
-export interface IBook {
-  id: string;
-  author: string;
-  title: string;
+@InputType({ description: 'New book data'})
+class BookCreateInput {
+  @Field()
+  title!: string;
+
+  @Field()
+  author!: string;
+
 }
 
-@ObjectType()
+@ObjectType({ description: 'A book object/data type'})
 export class Book {
   @Field(() => ID) // type => Book
   id: string;
 
-  @Field({ nullable: true })
+  @Field()
   author: string;
 
   @Field()
@@ -50,6 +58,10 @@ export class BookService {
   async get(id: string) {
     return prisma.book({ id })
   }
+
+  async create(args: BookCreateInput) {
+    return prisma.createBook(args)
+  }
 }
 
 @Resolver(() => Book)  // of => Book
@@ -68,5 +80,10 @@ export class BookResolver {
   @Query(() => [Book], { nullable: true }) // returns => [Book]
   async books(): Promise<Array<Book>> {
     return this.bookService.list();
+  }
+
+  @Mutation(() => Book)
+  async addBook(@Arg('input') input: BookCreateInput): Promise<Book> {
+    return this.bookService.create(input)
   }
 }
