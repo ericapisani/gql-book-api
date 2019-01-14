@@ -1,5 +1,8 @@
 const { ApolloServer, gql } = require('apollo-server');
-import { prisma } from './generated/prisma-client';
+import {
+  prisma,
+  BookCreateInput,
+} from './generated/prisma-client';
 import { IBook } from './types';
 
 const typeDefs = gql`
@@ -13,6 +16,10 @@ const typeDefs = gql`
     books: [Book]
     book(id: ID!): Book
   }
+
+  type Mutation {
+    createBook(title: String!, author: String!): Book
+  }
 `;
 
 const resolvers = {
@@ -22,6 +29,11 @@ const resolvers = {
     },
     book: (_: any, args: any): Promise<IBook> => {
       return prisma.book({ id: args.id })
+    }
+  },
+  Mutation: {
+    createBook:(_: any, args: BookCreateInput): Promise<IBook> => {
+      return prisma.createBook(args)
     }
   }
 };

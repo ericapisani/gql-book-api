@@ -25,4 +25,4 @@ Use `apollo schema:download --endpoint "http://localhost:4000/graphql"`
 Use `apollo client:codegen --target typescript --localSchemaFile './schema.json'`
 
 ### Generating types using apollo codegen (apollo <v2)
-Use `apollo codegen:generate --target=typescript --schema='./schema.json'`
+Use `apollo codegen:generate --queries=schema.gql --target=typescript --schema='./schema.json' --outputFlat`

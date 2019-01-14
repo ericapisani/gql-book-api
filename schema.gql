@@ -1,0 +1,23 @@
+query getBook {
+  book(id: ID!) {
+    id
+    title
+    author
+  }
+}
+
+query listBooks {
+  books() {
+    id
+    title
+    author
+  }
+}
+
+mutation createBook($title: String!, $author: String!) {
+  createBook(title: $title, author: $author) {
+    id
+    title
+    author
+  }
+}
