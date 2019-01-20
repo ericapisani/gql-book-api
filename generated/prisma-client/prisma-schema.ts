@@ -1,5 +1,135 @@
-export const typeDefs = /* GraphQL */ `type AggregateBook {
+export const typeDefs = /* GraphQL */ `type AggregateAuthor {
   count: Int!
+}
+
+type AggregateBook {
+  count: Int!
+}
+
+type Author {
+  id: ID!
+  name: String!
+  books(where: BookWhereInput, orderBy: BookOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Book!]
+}
+
+type AuthorConnection {
+  pageInfo: PageInfo!
+  edges: [AuthorEdge]!
+  aggregate: AggregateAuthor!
+}
+
+input AuthorCreateInput {
+  name: String!
+  books: BookCreateManyWithoutAuthorInput
+}
+
+input AuthorCreateOneWithoutBooksInput {
+  create: AuthorCreateWithoutBooksInput
+  connect: AuthorWhereUniqueInput
+}
+
+input AuthorCreateWithoutBooksInput {
+  name: String!
+}
+
+type AuthorEdge {
+  node: Author!
+  cursor: String!
+}
+
+enum AuthorOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type AuthorPreviousValues {
+  id: ID!
+  name: String!
+}
+
+type AuthorSubscriptionPayload {
+  mutation: MutationType!
+  node: Author
+  updatedFields: [String!]
+  previousValues: AuthorPreviousValues
+}
+
+input AuthorSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: AuthorWhereInput
+  AND: [AuthorSubscriptionWhereInput!]
+  OR: [AuthorSubscriptionWhereInput!]
+  NOT: [AuthorSubscriptionWhereInput!]
+}
+
+input AuthorUpdateInput {
+  name: String
+  books: BookUpdateManyWithoutAuthorInput
+}
+
+input AuthorUpdateManyMutationInput {
+  name: String
+}
+
+input AuthorUpdateOneWithoutBooksInput {
+  create: AuthorCreateWithoutBooksInput
+  update: AuthorUpdateWithoutBooksDataInput
+  upsert: AuthorUpsertWithoutBooksInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: AuthorWhereUniqueInput
+}
+
+input AuthorUpdateWithoutBooksDataInput {
+  name: String
+}
+
+input AuthorUpsertWithoutBooksInput {
+  update: AuthorUpdateWithoutBooksDataInput!
+  create: AuthorCreateWithoutBooksInput!
+}
+
+input AuthorWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  AND: [AuthorWhereInput!]
+  OR: [AuthorWhereInput!]
+  NOT: [AuthorWhereInput!]
+}
+
+input AuthorWhereUniqueInput {
+  id: ID
 }
 
 type BatchPayload {
@@ -9,7 +139,7 @@ type BatchPayload {
 type Book {
   id: ID!
   title: String!
-  author: String!
+  author: Author
 }
 
 type BookConnection {
@@ -20,7 +150,16 @@ type BookConnection {
 
 input BookCreateInput {
   title: String!
-  author: String!
+  author: AuthorCreateOneWithoutBooksInput
+}
+
+input BookCreateManyWithoutAuthorInput {
+  create: [BookCreateWithoutAuthorInput!]
+  connect: [BookWhereUniqueInput!]
+}
+
+input BookCreateWithoutAuthorInput {
+  title: String!
 }
 
 type BookEdge {
@@ -33,14 +172,45 @@ enum BookOrderByInput {
   id_DESC
   title_ASC
   title_DESC
-  author_ASC
-  author_DESC
 }
 
 type BookPreviousValues {
   id: ID!
   title: String!
-  author: String!
+}
+
+input BookScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  AND: [BookScalarWhereInput!]
+  OR: [BookScalarWhereInput!]
+  NOT: [BookScalarWhereInput!]
 }
 
 type BookSubscriptionPayload {
@@ -63,12 +233,46 @@ input BookSubscriptionWhereInput {
 
 input BookUpdateInput {
   title: String
-  author: String
+  author: AuthorUpdateOneWithoutBooksInput
+}
+
+input BookUpdateManyDataInput {
+  title: String
 }
 
 input BookUpdateManyMutationInput {
   title: String
-  author: String
+}
+
+input BookUpdateManyWithoutAuthorInput {
+  create: [BookCreateWithoutAuthorInput!]
+  delete: [BookWhereUniqueInput!]
+  connect: [BookWhereUniqueInput!]
+  disconnect: [BookWhereUniqueInput!]
+  update: [BookUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [BookUpsertWithWhereUniqueWithoutAuthorInput!]
+  deleteMany: [BookScalarWhereInput!]
+  updateMany: [BookUpdateManyWithWhereNestedInput!]
+}
+
+input BookUpdateManyWithWhereNestedInput {
+  where: BookScalarWhereInput!
+  data: BookUpdateManyDataInput!
+}
+
+input BookUpdateWithoutAuthorDataInput {
+  title: String
+}
+
+input BookUpdateWithWhereUniqueWithoutAuthorInput {
+  where: BookWhereUniqueInput!
+  data: BookUpdateWithoutAuthorDataInput!
+}
+
+input BookUpsertWithWhereUniqueWithoutAuthorInput {
+  where: BookWhereUniqueInput!
+  update: BookUpdateWithoutAuthorDataInput!
+  create: BookCreateWithoutAuthorInput!
 }
 
 input BookWhereInput {
@@ -100,20 +304,6 @@ input BookWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
-  author: String
-  author_not: String
-  author_in: [String!]
-  author_not_in: [String!]
-  author_lt: String
-  author_lte: String
-  author_gt: String
-  author_gte: String
-  author_contains: String
-  author_not_contains: String
-  author_starts_with: String
-  author_not_starts_with: String
-  author_ends_with: String
-  author_not_ends_with: String
   AND: [BookWhereInput!]
   OR: [BookWhereInput!]
   NOT: [BookWhereInput!]
@@ -126,6 +316,12 @@ input BookWhereUniqueInput {
 scalar Long
 
 type Mutation {
+  createAuthor(data: AuthorCreateInput!): Author!
+  updateAuthor(data: AuthorUpdateInput!, where: AuthorWhereUniqueInput!): Author
+  updateManyAuthors(data: AuthorUpdateManyMutationInput!, where: AuthorWhereInput): BatchPayload!
+  upsertAuthor(where: AuthorWhereUniqueInput!, create: AuthorCreateInput!, update: AuthorUpdateInput!): Author!
+  deleteAuthor(where: AuthorWhereUniqueInput!): Author
+  deleteManyAuthors(where: AuthorWhereInput): BatchPayload!
   createBook(data: BookCreateInput!): Book!
   updateBook(data: BookUpdateInput!, where: BookWhereUniqueInput!): Book
   updateManyBooks(data: BookUpdateManyMutationInput!, where: BookWhereInput): BatchPayload!
@@ -152,6 +348,9 @@ type PageInfo {
 }
 
 type Query {
+  author(where: AuthorWhereUniqueInput!): Author
+  authors(where: AuthorWhereInput, orderBy: AuthorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Author]!
+  authorsConnection(where: AuthorWhereInput, orderBy: AuthorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AuthorConnection!
   book(where: BookWhereUniqueInput!): Book
   books(where: BookWhereInput, orderBy: BookOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Book]!
   booksConnection(where: BookWhereInput, orderBy: BookOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BookConnection!
@@ -159,6 +358,7 @@ type Query {
 }
 
 type Subscription {
+  author(where: AuthorSubscriptionWhereInput): AuthorSubscriptionPayload
   book(where: BookSubscriptionWhereInput): BookSubscriptionPayload
 }
 `
