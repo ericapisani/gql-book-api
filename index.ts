@@ -4,9 +4,9 @@ import "reflect-metadata";
 
 import { buildSchema } from 'type-graphql'
 const { ApolloServer } = require('apollo-server');
-import { BookResolver } from './types'
+import { BookResolver, AuthorResolver } from './types'
 
-const resolvers = [BookResolver]
+const resolvers = [AuthorResolver, BookResolver]
 let schema
 
 async function startServer() {
