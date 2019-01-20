@@ -20,16 +20,7 @@ type AuthorConnection {
 
 input AuthorCreateInput {
   name: String!
-  books: BookCreateManyWithoutAuthorInput
-}
-
-input AuthorCreateOneWithoutBooksInput {
-  create: AuthorCreateWithoutBooksInput
-  connect: AuthorWhereUniqueInput
-}
-
-input AuthorCreateWithoutBooksInput {
-  name: String!
+  books: BookCreateManyInput
 }
 
 type AuthorEdge {
@@ -69,29 +60,11 @@ input AuthorSubscriptionWhereInput {
 
 input AuthorUpdateInput {
   name: String
-  books: BookUpdateManyWithoutAuthorInput
+  books: BookUpdateManyInput
 }
 
 input AuthorUpdateManyMutationInput {
   name: String
-}
-
-input AuthorUpdateOneWithoutBooksInput {
-  create: AuthorCreateWithoutBooksInput
-  update: AuthorUpdateWithoutBooksDataInput
-  upsert: AuthorUpsertWithoutBooksInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: AuthorWhereUniqueInput
-}
-
-input AuthorUpdateWithoutBooksDataInput {
-  name: String
-}
-
-input AuthorUpsertWithoutBooksInput {
-  update: AuthorUpdateWithoutBooksDataInput!
-  create: AuthorCreateWithoutBooksInput!
 }
 
 input AuthorWhereInput {
@@ -139,7 +112,6 @@ type BatchPayload {
 type Book {
   id: ID!
   title: String!
-  author: Author
 }
 
 type BookConnection {
@@ -150,16 +122,11 @@ type BookConnection {
 
 input BookCreateInput {
   title: String!
-  author: AuthorCreateOneWithoutBooksInput
 }
 
-input BookCreateManyWithoutAuthorInput {
-  create: [BookCreateWithoutAuthorInput!]
+input BookCreateManyInput {
+  create: [BookCreateInput!]
   connect: [BookWhereUniqueInput!]
-}
-
-input BookCreateWithoutAuthorInput {
-  title: String!
 }
 
 type BookEdge {
@@ -231,28 +198,31 @@ input BookSubscriptionWhereInput {
   NOT: [BookSubscriptionWhereInput!]
 }
 
+input BookUpdateDataInput {
+  title: String
+}
+
 input BookUpdateInput {
   title: String
-  author: AuthorUpdateOneWithoutBooksInput
 }
 
 input BookUpdateManyDataInput {
   title: String
 }
 
-input BookUpdateManyMutationInput {
-  title: String
-}
-
-input BookUpdateManyWithoutAuthorInput {
-  create: [BookCreateWithoutAuthorInput!]
+input BookUpdateManyInput {
+  create: [BookCreateInput!]
+  update: [BookUpdateWithWhereUniqueNestedInput!]
+  upsert: [BookUpsertWithWhereUniqueNestedInput!]
   delete: [BookWhereUniqueInput!]
   connect: [BookWhereUniqueInput!]
   disconnect: [BookWhereUniqueInput!]
-  update: [BookUpdateWithWhereUniqueWithoutAuthorInput!]
-  upsert: [BookUpsertWithWhereUniqueWithoutAuthorInput!]
   deleteMany: [BookScalarWhereInput!]
   updateMany: [BookUpdateManyWithWhereNestedInput!]
+}
+
+input BookUpdateManyMutationInput {
+  title: String
 }
 
 input BookUpdateManyWithWhereNestedInput {
@@ -260,19 +230,15 @@ input BookUpdateManyWithWhereNestedInput {
   data: BookUpdateManyDataInput!
 }
 
-input BookUpdateWithoutAuthorDataInput {
-  title: String
+input BookUpdateWithWhereUniqueNestedInput {
+  where: BookWhereUniqueInput!
+  data: BookUpdateDataInput!
 }
 
-input BookUpdateWithWhereUniqueWithoutAuthorInput {
+input BookUpsertWithWhereUniqueNestedInput {
   where: BookWhereUniqueInput!
-  data: BookUpdateWithoutAuthorDataInput!
-}
-
-input BookUpsertWithWhereUniqueWithoutAuthorInput {
-  where: BookWhereUniqueInput!
-  update: BookUpdateWithoutAuthorDataInput!
-  create: BookCreateWithoutAuthorInput!
+  update: BookUpdateDataInput!
+  create: BookCreateInput!
 }
 
 input BookWhereInput {

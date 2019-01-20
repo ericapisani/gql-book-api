@@ -13,14 +13,16 @@ import {
   prisma,
 } from './generated/prisma-client';
 
+@InputType({ description: 'New author data'})
+class AuthorCreateInput {
+  @Field()
+  name!: string;
+}
+
 @InputType({ description: 'New book data'})
 class BookCreateInput {
   @Field()
   title!: string;
-
-  @Field()
-  author!: string;
-
 }
 
 @ObjectType({ description: 'A book object/data type'})
@@ -29,22 +31,16 @@ export class Book {
   id: string;
 
   @Field()
-  author: string;
-
-  @Field()
   title: string;
 
   constructor({
     id,
-    author,
     title,
   }: {
     id: string,
-    author: string,
     title: string,
   }) {
     this.id = id;
-    this.author = author;
     this.title = title;
   }
 }
@@ -63,6 +59,48 @@ export class BookService {
     return prisma.createBook(args)
   }
 }
+
+@ObjectType({ description: 'An author'})
+export class Author {
+  @Field(() => ID) // type => Author
+  id: string;
+
+  @Field()
+  name: string;
+
+  @Field(() => [Book], { nullable: true })
+  books?: Book[];
+
+  constructor({
+    id,
+    name,
+    books,
+  }: {
+    id: string,
+    name: string,
+    books: Book[],
+  }) {
+    this.id = id;
+    this.name = name;
+    this.books = books;
+  }
+}
+
+@Service()
+export class AuthorService {
+  async list() {
+    return prisma.authors();
+  }
+
+  async get(id: string) {
+    return prisma.author({ id })
+  }
+
+  async create(args: AuthorCreateInput) {
+    return prisma.createAuthor(args)
+  }
+}
+
 
 @Resolver(() => Book)  // of => Book
 export class BookResolver {
@@ -85,5 +123,28 @@ export class BookResolver {
   @Mutation(() => Book)
   async addBook(@Arg('input') input: BookCreateInput): Promise<Book> {
     return this.bookService.create(input)
+  }
+}
+@Resolver(() => Author)  // of => Author
+export class AuthorResolver {
+  private readonly authorService: AuthorService;
+
+  constructor() {
+    this.authorService = new AuthorService();
+  }
+
+  @Query(() => Author, { nullable: true }) // returns => Author
+  async author(@Arg("id") id: string): Promise<Author | null> {
+    return this.authorService.get(id);
+  }
+
+  @Query(() => [Author], { nullable: true }) // returns => [Author]
+  async authors(): Promise<Array<Author>> {
+    return this.authorService.list();
+  }
+
+  @Mutation(() => Author)
+  async addAuthor(@Arg('input') input: AuthorCreateInput): Promise<Author> {
+    return this.authorService.create(input)
   }
 }
