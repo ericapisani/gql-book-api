@@ -142,7 +142,9 @@ export type BookOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "title_ASC"
-  | "title_DESC";
+  | "title_DESC"
+  | "authorId_ASC"
+  | "authorId_DESC";
 
 export type AuthorOrderByInput =
   | "id_ASC"
@@ -207,6 +209,20 @@ export interface BookWhereInput {
   title_not_starts_with?: String;
   title_ends_with?: String;
   title_not_ends_with?: String;
+  authorId?: String;
+  authorId_not?: String;
+  authorId_in?: String[] | String;
+  authorId_not_in?: String[] | String;
+  authorId_lt?: String;
+  authorId_lte?: String;
+  authorId_gt?: String;
+  authorId_gte?: String;
+  authorId_contains?: String;
+  authorId_not_contains?: String;
+  authorId_starts_with?: String;
+  authorId_not_starts_with?: String;
+  authorId_ends_with?: String;
+  authorId_not_ends_with?: String;
   AND?: BookWhereInput[] | BookWhereInput;
   OR?: BookWhereInput[] | BookWhereInput;
   NOT?: BookWhereInput[] | BookWhereInput;
@@ -280,6 +296,20 @@ export interface BookScalarWhereInput {
   title_not_starts_with?: String;
   title_ends_with?: String;
   title_not_ends_with?: String;
+  authorId?: String;
+  authorId_not?: String;
+  authorId_in?: String[] | String;
+  authorId_not_in?: String[] | String;
+  authorId_lt?: String;
+  authorId_lte?: String;
+  authorId_gt?: String;
+  authorId_gte?: String;
+  authorId_contains?: String;
+  authorId_not_contains?: String;
+  authorId_starts_with?: String;
+  authorId_not_starts_with?: String;
+  authorId_ends_with?: String;
+  authorId_not_ends_with?: String;
   AND?: BookScalarWhereInput[] | BookScalarWhereInput;
   OR?: BookScalarWhereInput[] | BookScalarWhereInput;
   NOT?: BookScalarWhereInput[] | BookScalarWhereInput;
@@ -309,10 +339,12 @@ export interface AuthorSubscriptionWhereInput {
 
 export interface BookUpdateInput {
   title?: String;
+  authorId?: String;
 }
 
 export interface BookUpdateManyDataInput {
   title?: String;
+  authorId?: String;
 }
 
 export interface AuthorUpdateInput {
@@ -322,10 +354,12 @@ export interface AuthorUpdateInput {
 
 export interface BookCreateInput {
   title: String;
+  authorId: String;
 }
 
 export interface BookUpdateDataInput {
   title?: String;
+  authorId?: String;
 }
 
 export interface AuthorCreateInput {
@@ -343,6 +377,7 @@ export interface AuthorUpdateManyMutationInput {
 
 export interface BookUpdateManyMutationInput {
   title?: String;
+  authorId?: String;
 }
 
 export interface BookSubscriptionWhereInput {
@@ -363,6 +398,7 @@ export interface NodeNode {
 export interface BookPreviousValues {
   id: ID_Output;
   title: String;
+  authorId: String;
 }
 
 export interface BookPreviousValuesPromise
@@ -370,6 +406,7 @@ export interface BookPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
+  authorId: () => Promise<String>;
 }
 
 export interface BookPreviousValuesSubscription
@@ -377,6 +414,7 @@ export interface BookPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   title: () => Promise<AsyncIterator<String>>;
+  authorId: () => Promise<AsyncIterator<String>>;
 }
 
 export interface BatchPayload {
@@ -448,11 +486,13 @@ export interface BookSubscriptionPayloadSubscription
 export interface Book {
   id: ID_Output;
   title: String;
+  authorId: String;
 }
 
 export interface BookPromise extends Promise<Book>, Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
+  authorId: () => Promise<String>;
 }
 
 export interface BookSubscription
@@ -460,6 +500,7 @@ export interface BookSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   title: () => Promise<AsyncIterator<String>>;
+  authorId: () => Promise<AsyncIterator<String>>;
 }
 
 export interface BookEdge {

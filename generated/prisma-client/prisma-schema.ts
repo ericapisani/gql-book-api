@@ -112,6 +112,7 @@ type BatchPayload {
 type Book {
   id: ID!
   title: String!
+  authorId: String!
 }
 
 type BookConnection {
@@ -122,6 +123,7 @@ type BookConnection {
 
 input BookCreateInput {
   title: String!
+  authorId: String!
 }
 
 input BookCreateManyInput {
@@ -139,11 +141,14 @@ enum BookOrderByInput {
   id_DESC
   title_ASC
   title_DESC
+  authorId_ASC
+  authorId_DESC
 }
 
 type BookPreviousValues {
   id: ID!
   title: String!
+  authorId: String!
 }
 
 input BookScalarWhereInput {
@@ -175,6 +180,20 @@ input BookScalarWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  authorId: String
+  authorId_not: String
+  authorId_in: [String!]
+  authorId_not_in: [String!]
+  authorId_lt: String
+  authorId_lte: String
+  authorId_gt: String
+  authorId_gte: String
+  authorId_contains: String
+  authorId_not_contains: String
+  authorId_starts_with: String
+  authorId_not_starts_with: String
+  authorId_ends_with: String
+  authorId_not_ends_with: String
   AND: [BookScalarWhereInput!]
   OR: [BookScalarWhereInput!]
   NOT: [BookScalarWhereInput!]
@@ -200,14 +219,17 @@ input BookSubscriptionWhereInput {
 
 input BookUpdateDataInput {
   title: String
+  authorId: String
 }
 
 input BookUpdateInput {
   title: String
+  authorId: String
 }
 
 input BookUpdateManyDataInput {
   title: String
+  authorId: String
 }
 
 input BookUpdateManyInput {
@@ -223,6 +245,7 @@ input BookUpdateManyInput {
 
 input BookUpdateManyMutationInput {
   title: String
+  authorId: String
 }
 
 input BookUpdateManyWithWhereNestedInput {
@@ -270,6 +293,20 @@ input BookWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  authorId: String
+  authorId_not: String
+  authorId_in: [String!]
+  authorId_not_in: [String!]
+  authorId_lt: String
+  authorId_lte: String
+  authorId_gt: String
+  authorId_gte: String
+  authorId_contains: String
+  authorId_not_contains: String
+  authorId_starts_with: String
+  authorId_not_starts_with: String
+  authorId_ends_with: String
+  authorId_not_ends_with: String
   AND: [BookWhereInput!]
   OR: [BookWhereInput!]
   NOT: [BookWhereInput!]
