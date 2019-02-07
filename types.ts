@@ -110,7 +110,7 @@ export class BookResolver {
   }
 
   @Mutation(() => Book)
-  async addBook(@Arg('input') input: BookCreateInput): Promise<Book> {
+  addBook(@Arg('input') input: BookCreateInput): Promise<Book> {
     return this.bookService.create(input)
   }
 }
