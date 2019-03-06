@@ -7,6 +7,7 @@ GraphQL Day Toronto 2019 project.
 ### Requirements
 * Docker
 * Prisma
+* Prisma-cli
 
 ### Prisma Setup
 Reference: https://www.prisma.io/docs/1.22/get-started/01-setting-up-prisma-new-database-JAVASCRIPT-a002/
