@@ -1,0 +1,44 @@
+{
+  "name": "gql-book-api",
+  "version": "0.0.1",
+  "description": "GraphQL Day Toronto 2019 project.",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "nodemon --watch '*.ts' --ignore '*.spec.ts' --exec 'ts-node' index.ts",
+    "start-prisma": "docker-compose up -d",
+    "deploy-prisma": "prisma deploy",
+    "build-ts": "tsc",
+    "clean-build": "rm -rf build/*",
+    "lint": "tslint -c tslint.json 'src/**/*.ts' 'index.ts' --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/ericapisani/gql-book-api.git"
+  },
+  "keywords": [],
+  "author": "Erica Pisani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/ericapisani/gql-book-api/issues"
+  },
+  "homepage": "https://gitlab.com/ericapisani/gql-book-api#readme",
+  "dependencies": {
+    "apollo-server": "2.3.1",
+    "graphql": "14.0.2",
+    "prisma-client-lib": "1.24.0",
+    "reflect-metadata": "0.1.12",
+    "type-graphql": "0.16.0",
+    "typedi": "0.8.0"
+  },
+  "devDependencies": {
+    "@types/graphql": "14.0.3",
+    "eslint-plugin-graphql": "3.0.1",
+    "nodemon": "1.18.9",
+    "prettier": "1.15.3",
+    "ts-node": "7.0.1",
+    "tslint": "5.11.0",
+    "tslint-plugin-prettier": "2.0.1",
+    "typescript": "3.2.2"
+  }
+}
