@@ -9,7 +9,7 @@
     "deploy-prisma": "prisma deploy",
     "build-ts": "tsc",
     "clean-build": "rm -rf build/*",
-    "lint": "tslint -c tslint.json 'src/**/*.ts' 'index.ts'",
+    "lint": "tslint -c tslint.json 'src/**/*.ts' 'index.ts' --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,7 +29,7 @@
     "prisma-client-lib": "1.24.0",
     "reflect-metadata": "0.1.12",
     "type-graphql": "0.16.0",
-    "typedi": "^0.8.0"
+    "typedi": "0.8.0"
   },
   "devDependencies": {
     "@types/graphql": "14.0.3",
