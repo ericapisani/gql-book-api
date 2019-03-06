@@ -1,0 +1,11 @@
+type Book {
+  id: ID! @id
+  title: String!
+  authorId: String!
+}
+
+type Author {
+  id: ID! @id
+  name: String!
+  books: [Book!]  @relation(link: INLINE)
+}
