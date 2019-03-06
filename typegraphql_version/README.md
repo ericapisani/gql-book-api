@@ -1,4 +1,4 @@
-# gql-recipe-api
+# gql-book-api
 
 GraphQL Day Toronto 2019 project.
 
